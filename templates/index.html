@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Crop Doctor - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Marked.js for Markdown rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body class="bg-gradient-to-br from-green-100 to-blue-100 min-h-screen flex flex-col font-inter">
+    <!-- Navigation Bar -->
+    <nav class="bg-green-700 p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="/" class="text-white text-2xl font-bold flex items-center">
+                <i class="fas fa-leaf mr-2"></i> AI Crop Doctor
+            </a>
+            <div class="space-x-4">
+                <a href="/" class="text-white hover:text-green-200 transition-colors duration-200 font-medium">Home</a>
+                <a href="/history_page" target="_blank" class="text-white hover:text-green-200 transition-colors duration-200 font-medium">History</a>
+                <a href="/user_guide" target="_blank" class="text-white hover:text-green-200 transition-colors duration-200 font-medium">User Guide</a>
+                <a href="/tools" target="_blank" class="text-white hover:text-green-200 transition-colors duration-200 font-medium">Tools</a>
+                <a href="#" class="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition-colors duration-200 font-semibold">
+                    <i class="fas fa-phone-alt mr-1"></i> Emergency
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow flex items-center justify-center p-4">
+        <!-- Main content container - now allows vertical stacking and wider max-width -->
+        <div class="bg-white p-8 rounded-2xl shadow-xl max-w-6xl w-full text-center border-t-4 border-green-500 flex flex-col gap-8">
+            
+            <!-- Left Section: Introduction & Sample Images - now always full width -->
+            <div id="intro-sample-section" class="w-full text-left">
+                <h2 class="text-3xl font-bold text-green-700 mb-4">Welcome to AI Crop Doctor!</h2>
+                <p class="text-gray-700 mb-4 leading-relaxed">
+                    Your intelligent assistant for identifying plant diseases and getting actionable treatment recommendations. Simply upload an image of your affected plant, and our AI will provide an instant diagnosis.
+                </p>
+                <p class="text-gray-600 mb-6">
+                    We leverage advanced machine learning models and the power of generative AI to give you comprehensive reports, including organic and chemical action plans, long-term prevention strategies, and local agricultural support information.
+                </p>
+
+                <div id="upload-section" class="mb-8">
+                    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Upload Plant Image</h2>
+                    <!-- Adjusted padding and SVG size for smaller height -->
+                    <div id="drop-area" class="border-2 border-dashed border-gray-300 rounded-xl p-4 mb-4 flex flex-col items-center justify-center bg-gray-50 hover:border-green-400 transition-all cursor-pointer">
+                        <svg class="w-12 h-12 text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 25a4 4 0 01-.88-7.903A5 5 0 0115.9 6L25 6a5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                        <p class="text-base text-gray-600">Drag & Drop your image here, or <span class="text-green-600 font-medium">click to browse</span></p>
+                        <input type="file" id="image-input" accept="image/*" class="hidden">
+                    </div>
+                    <!-- Adjusted height for initial image preview -->
+                    <div id="image-preview-container-initial" class="hidden mb-4">
+                        <img id="image-preview-initial" class="max-w-full h-32 object-contain mx-auto rounded-lg shadow-md border border-gray-200" alt="Image Preview">
+                        <p id="image-name-initial" class="text-gray-600 mt-2 text-sm"></p>
+                    </div>
+                    <button id="predict-button" class="bg-green-600 text-white px-8 py-3 rounded-xl hover:bg-green-700 transition-colors duration-300 shadow-lg text-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed">
+                        Analyze Image
+                    </button>
+                </div>
+
+                <h3 class="text-2xl font-semibold text-gray-800 mb-4">Try with Sample Images:</h3>
+                <!--  grid for rows with 5 images each -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/apple_healthy.JPG') }}" data-image-name="apple_healthy.JPG">
+                        <img src="{{ url_for('static', filename='images/apple_healthy.JPG') }}" alt="Apple Healthy" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                        <p class="text-xs font-medium text-gray-700">Healthy Apple</p>
+                    </div>
+                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/apple_scab.jpg') }}" data-image-name="apple_scab.jpg">
+                        <img src="{{ url_for('static', filename='images/apple_scab.jpg') }}" alt="Apple Scab" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                        <p class="text-xs font-medium text-gray-700">Apple Scab</p>
+                    </div>
+                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/blueberry_healthy.jpg') }}" data-image-name="blueberry_healthy.jpg">
+                        <img src="{{ url_for('static', filename='images/blueberry_healthy.jpg') }}" alt="Healthy Blueberry" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                        <p class="text-xs font-medium text-gray-700">Healthy Blueberry</p>
+                    </div>
+                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/corn_rust.jpg') }}" data-image-name="corn_rust.jpg">
+                        <img src="{{ url_for('static', filename='images/corn_rust.jpg') }}" alt="Corn Rust" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                        <p class="text-xs font-medium text-gray-700">Corn Rust</p>
+                    </div>
+                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/grape_esca.jpg') }}" data-image-name="grape_esca.jpg">
+                        <img src="{{ url_for('static', filename='images/grape_esca.jpg') }}" alt="Grape Esca" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                        <p class="text-xs font-medium text-gray-700">Grape Esca</p>
+                    </div>
+                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/grape_healthy.jpg') }}" data-image-name="grape_healthy.jpg">
+                        <img src="{{ url_for('static', filename='images/grape_healthy.jpg') }}" alt="Grape Healthy" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                        <p class="text-xs font-medium text-gray-700">Grape Healthy</p>
+                    </div>
+                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/pepper_spot.jpg') }}" data-image-name="pepper_spot.jpg">
+                        <img src="{{ url_for('static', filename='images/pepper_spot.jpg') }}" alt="Pepper Spot" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                        <p class="text-xs font-medium text-gray-700">Pepper Spot</p>
+                    </div>
+                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/potato_late_blight.jpg') }}" data-image-name="potato_late_blight.jpg">
+                        <img src="{{ url_for('static', filename='images/potato_late_blight.jpg') }}" alt="Potato Late Blight" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                        <p class="text-xs font-medium text-gray-700">Potato Late Blight</p>
+                    </div>
+                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/tomato_late_blight.jpg') }}" data-image-name="tomato_late_blight.jpg">
+                        <img src="{{ url_for('static', filename='images/tomato_late_blight.jpg') }}" alt="Tomato Late Blight" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                        <p class="text-xs font-medium text-gray-700">Tomato Late Blight</p>
+                    </div>
+                    <div class="sample-image-card bg-gray-50 p-1 rounded-lg shadow-sm cursor-pointer hover:bg-gray-100 transition-colors" data-image-path="{{ url_for('static', filename='images/potato_early_blight.jpg') }}" data-image-name="potato_early_blight.jpg">
+                        <img src="{{ url_for('static', filename='images/potato_early_blight.jpg') }}" alt="Potato Early Blight" class="w-full h-25 object-cover rounded-md mb-0.5 border border-gray-200">
+                        <p class="text-xs font-medium text-gray-700">Potato Early Blight</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Application Logic Section - now always full width -->
+            <div id="main-app-section" class="w-full">
+                <!-- Loading Indicator for initial prediction -->
+                <div id="loading-spinner-initial" class="hidden flex flex-col items-center justify-center mb-8">
+                    <div class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-24 w-24 mb-4"></div>
+                    <p class="text-gray-700 text-lg font-medium">Analyzing your image...</p>
+                </div>
+
+                <!-- Disease Detection Section -->
+                <div id="disease-detection-section" class="hidden mb-8 text-left">
+                    <div class="bg-blue-600 text-white p-3 rounded-t-lg flex items-center justify-between">
+                        <h2 class="text-xl font-semibold"><i class="fas fa-microscope mr-2"></i>Disease Detection</h2>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-b-lg shadow-md mb-6 border border-gray-200">
+                        <div class="flex items-center justify-between mb-2">
+                            <p id="prediction-result" class="text-xl text-green-700 font-medium"></p>
+                            <div class="flex items-center">
+                                <span class="text-gray-600 text-sm mr-2">Confidence Level:</span>
+                                <div class="w-32 bg-gray-200 rounded-full h-2.5">
+                                    <div id="confidence-bar" class="bg-green-500 h-2.5 rounded-full" style="width: 0%;"></div>
+                                </div>
+                                <span id="confidence-score-text" class="ml-2 text-gray-700 font-semibold text-sm"></span>
+                            </div>
+                        </div>
+                        <img id="image-preview-summary" class="max-w-full h-48 object-contain mx-auto rounded-lg shadow-md border border-gray-200 mt-4" alt="Uploaded Image">
+                        <p id="image-name-summary" class="text-gray-600 mt-2 text-sm text-center"></p>
+                    </div>
+                </div>
+
+                <!-- Additional Information Section -->
+                <div id="additional-info-section" class="hidden mb-8 text-left">
+                    <div class="bg-yellow-500 text-white p-3 rounded-t-lg flex items-center">
+                        <h3 class="text-xl font-semibold"><i class="fas fa-info-circle mr-2"></i>Additional Information</h3>
+                    </div>
+                    <div id="additional-info-content" class="bg-gray-50 p-4 rounded-b-lg shadow-md mb-6 border border-gray-200">
+                        <p class="text-gray-700 mb-4">Please answer these questions for a more accurate diagnosis:</p>
+
+                        <!-- Plant Symptoms -->
+                        <div class="bg-white p-4 rounded-lg shadow-sm mb-4 border border-green-300">
+                            <h4 class="text-lg font-semibold text-gray-800 mb-3 flex items-center"><i class="fas fa-leaf text-green-600 mr-2"></i>Plant Symptoms</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="leaf-discoloration" class="block text-gray-700 text-sm font-medium mb-1">Leaf discoloration observed?</label>
+                                    <select id="leaf-discoloration" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                        <option value="">Select...</option>
+                                        <option value="yellowing">Yellowing</option>
+                                        <option value="browning">Browning</option>
+                                        <option value="reddening">Reddening</option>
+                                        <option value="spots">Spots</option>
+                                        <option value="none">None</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="wilting-dropping" class="block text-gray-700 text-sm font-medium mb-1">Wilting or dropping?</label>
+                                    <select id="wilting-dropping" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                                        <option value="">Select...</option>
+                                        <option value="wilting">Wilting</option>
+                                        <option value="dropping">Dropping</option>
+                                        <option value="none">None</option>
+                                        <option value="slight">Slight</option>
+                                        <option value="severe">Severe</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Environmental Conditions -->
+                        <div class="bg-white p-4 rounded-lg shadow-sm mb-4 border border-blue-300">
+                            <h4 class="text-lg font-semibold text-gray-800 mb-3 flex items-center"><i class="fas fa-cloud-sun text-blue-600 mr-2"></i>Environmental Conditions</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="recent-weather" class="block text-gray-700 text-sm font-medium mb-1">Recent weather conditions?</label>
+                                    <select id="recent-weather" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                        <option value="">Select...</option>
+                                        <option value="dry">Dry</option>
+                                        <option value="humid">Humid</option>
+                                        <option value="rainy">Rainy</option>
+                                        <option value="normal">Normal</option>
+                                        <option value="extreme_heat">Extreme Heat</option>
+                                        <option value="extreme_cold">Extreme Cold</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="temperature-condition" class="block text-gray-700 text-sm font-medium mb-1">Temperature condition?</label>
+                                    <select id="temperature-condition" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                        <option value="">Select...</option>
+                                        <option value="normal">Normal</option>
+                                        <option value="hot">Hot</option>
+                                        <option value="cold">Cold</option>
+                                        <option value="fluctuating">Fluctuating</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Treatment History -->
+                        <div class="bg-white p-4 rounded-lg shadow-sm mb-4 border border-purple-300">
+                            <h4 class="text-lg font-semibold text-gray-800 mb-3 flex items-center"><i class="fas fa-flask text-purple-600 mr-2"></i>Treatment History</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="recent-fertilizer" class="block text-gray-700 text-sm font-medium mb-1">Recent fertilizer application?</label>
+                                    <select id="recent-fertilizer" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                                        <option value="">Select...</option>
+                                        <option value="yes_npk">Yes (NPK)</option>
+                                        <option value="yes_organic">Yes (Organic)</option>
+                                        <option value="yes_other">Yes (Other)</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="previous-pesticide" class="block text-gray-700 text-sm font-medium mb-1">Previous pesticide use?</label>
+                                    <select id="previous-pesticide" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                                        <option value="">Select...</option>
+                                        <option value="yes_fungicide">Yes (Fungicide)</option>
+                                        <option value="yes_insecticide">Yes (Insecticide)</option>
+                                        <option value="yes_herbicide">Yes (Herbicide)</option>
+                                        <option value="no">No</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pest Observations -->
+                        <div class="bg-white p-4 rounded-lg shadow-sm mb-4 border border-red-300">
+                            <h4 class="text-lg font-semibold text-gray-800 mb-3 flex items-center"><i class="fas fa-bug text-red-600 mr-2"></i>Pest Observations</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="insects-observed" class="block text-gray-700 text-sm font-medium mb-1">Insects observed?</label>
+                                    <select id="insects-observed" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                                        <option value="">Select...</option>
+                                        <option value="aphids">Aphids</option>
+                                        <option value="whiteflies">Whiteflies</option>
+                                        <option value="spider_mites">Spider Mites</option>
+                                        <option value="caterpillars">Caterpillars</option>
+                                        <option value="none">None</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="evidence-of-damage" class="block text-gray-700 text-sm font-medium mb-1">Evidence of pest damage?</label>
+                                    <select id="evidence-of-damage" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-red-500 focus:border-transparent">
+                                        <option value="">Select...</option>
+                                        <option value="chewing">Chewing marks</option>
+                                        <option value="holes">Holes in leaves</option>
+                                        <option value="sticky_residue">Sticky residue</option>
+                                        <option value="none">None</option>
+                                        <option value="visible_pests">Visible pests</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Plant Management -->
+                        <div class="bg-white p-4 rounded-lg shadow-sm mb-4 border border-orange-300">
+                            <h4 class="text-lg font-semibold text-gray-800 mb-3 flex items-center"><i class="fas fa-hand-holding-water text-orange-600 mr-2"></i>Plant Management</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="watering-frequency" class="block text-gray-700 text-sm font-medium mb-1">Watering frequency?</label>
+                                    <select id="watering-frequency" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                                        <option value="">Select...</option>
+                                        <option value="daily">Daily</option>
+                                        <option value="every_few_days">Every few days</option>
+                                        <option value="weekly">Weekly</option>
+                                        <option value="irregular">Irregular</option>
+                                        <option value="overwatering">Overwatering signs</option>
+                                        <option value="underwatering">Underwatering signs</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="plant-age-growth" class="block text-gray-700 text-sm font-medium mb-1">Plant age/growth stage?</label>
+                                    <select id="plant-age-growth" class="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:border-transparent">
+                                        <option value="">Select...</option>
+                                        <option value="seedling">Seedling</option>
+                                        <option value="vegetative">Vegetative</option>
+                                        <option value="flowering">Flowering</option>
+                                        <option value="fruiting">Fruiting</option>
+                                        <option value="mature">Mature</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="get-report-button" class="bg-blue-600 text-white px-8 py-3 rounded-xl hover:bg-blue-700 transition-colors duration-300 shadow-lg text-lg font-semibold w-full">
+                        <i class="fas fa-robot mr-2"></i> Get AI Diagnosis
+                    </button>
+                </div>
+
+                <!-- Loading Indicator for detailed report generation -->
+                <div id="loading-spinner-report" class="hidden flex flex-col items-center justify-center mb-8">
+                    <div class="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-24 w-24 mb-4"></div>
+                    <p class="text-gray-700 text-lg font-medium text-center">
+                        <span id="loading-text-report">Generating your personalized report...</span>
+                        <br>
+                        <span class="text-sm text-gray-500">This might take a moment as our AI Agronomist compiles the best advice for you.</span>
+                    </p>
+                </div>
+
+                <!-- AI Agronomist Report Section - now separate and hidden by default -->
+                <div id="report-section-standalone" class="hidden text-left mb-8">
+                    <div class="bg-green-600 text-white p-3 rounded-t-lg flex items-center">
+                        <h2 class="text-xl font-semibold"><i class="fas fa-robot mr-2"></i>AI Agronomist Report</h2>
+                    </div>
+                    <div id="final-report-content" class="bg-gray-50 p-6 rounded-b-xl border border-gray-200 prose max-w-none">
+                        <!-- Report content will be injected here -->
+                    </div>
+                    <button id="start-over-button" class="bg-gray-400 text-white px-8 py-3 rounded-xl hover:bg-gray-500 transition-colors duration-300 shadow-lg text-lg font-semibold mt-6">
+                        Start Over
+                    </button>
+                </div>
+
+                <!-- Error Message -->
+                <div id="error-message" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-xl relative mt-4" role="alert">
+                    <strong class="font-bold">Error!</strong>
+                    <span class="block sm:inline" id="error-text">Something went wrong. Please try again.</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

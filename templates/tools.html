@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Crop Doctor - Tools</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-gradient-to-br from-green-100 to-blue-100 min-h-screen flex flex-col font-inter">
+    <!-- Navigation Bar -->
+    <nav class="bg-green-700 p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="/" class="text-white text-2xl font-bold flex items-center">
+                <i class="fas fa-leaf mr-2"></i> AI Crop Doctor
+            </a>
+            <div class="space-x-4">
+                <a href="/" target="_blank" class="text-white hover:text-green-200 transition-colors duration-200 font-medium">Home</a>
+                <a href="/history_page" target="_blank" class="text-white hover:text-green-200 transition-colors duration-200 font-medium">History</a>
+                <a href="/user_guide" target="_blank" class="text-white hover:text-green-200 transition-colors duration-200 font-medium">User Guide</a>
+                <a href="/tools" class="text-white hover:text-green-200 transition-colors duration-200 font-medium">Tools</a>
+                <a href="#" class="bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600 transition-colors duration-200 font-semibold">
+                    <i class="fas fa-phone-alt mr-1"></i> Emergency
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow flex items-center justify-center p-4">
+        <div class="bg-white p-8 rounded-2xl shadow-xl max-w-6xl w-full text-center border-t-4 border-green-500 flex flex-col gap-8">
+            <h1 class="text-4xl font-bold text-green-800 mb-6">Essential Agricultural Tools</h1>
+            <p class="text-gray-700 mb-8 leading-relaxed">
+                Explore a collection of valuable tools and resources to support your farming and gardening efforts.
+            </p>
+
+            <!-- Government Resources Section -->
+            <div class="mb-10 text-left">
+                <h2 class="text-3xl font-bold text-green-700 mb-4">Government Agricultural Resources</h2>
+                <p class="text-gray-700 mb-6">
+                    Access official government portals and initiatives for agricultural support, schemes, and information.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                    <!-- Example Government Tool 1 -->
+                    <a href="https://farmer.gov.in/" target="_blank" class="tool-card bg-green-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-left">
+                        <div class="bg-green-200 rounded-full p-3 mb-4">
+                            <i class="fas fa-users text-green-700 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Farmer's Portal (India)</h3>
+                        <p class="text-gray-600 text-sm">Information on services for farmers, including schemes and advisories.</p>
+                    </a>
+
+                    <!-- Example Government Tool 2 -->
+                    <a href="https://mkisan.gov.in/" target="_blank" class="tool-card bg-purple-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-left">
+                        <div class="bg-purple-200 rounded-full p-3 mb-4">
+                            <i class="fas fa-mobile-alt text-purple-700 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">mKisan Portal (India)</h3>
+                        <p class="text-gray-600 text-sm">Agricultural advisories via SMS to farmers.</p>
+                    </a>
+
+                    <!-- Example Government Tool 3 -->
+                    <a href="https://www.india.gov.in/topics/agriculture" target="_blank" class="tool-card bg-green-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-left">
+                    <div class="bg-green-200 rounded-full p-3 mb-4">
+                        <i class="fas fa-globe-americas text-green-700 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Government Agricultural Schemes (India)</h3>
+                    <p class="text-gray-600 text-sm">Explore various government initiatives and schemes for farmers in India.</p>
+                </a>
+
+                <!-- Example Government Tool 4 -->
+                <a href="https://agri.nic.in/" target="_blank" class="tool-card bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-left">
+                    <div class="bg-blue-200 rounded-full p-3 mb-4">
+                        <i class="fas fa-tractor text-blue-700 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Ministry of Agriculture & Farmers Welfare</h3>
+                    <p class="text-gray-600 text-sm">Official website for policies, statistics, and news from the Indian Ministry of Agriculture.</p>
+                </a>
+
+                <!-- Example Government Tool 5 -->
+                <a href="https://www.imd.gov.in/" target="_blank" class="tool-card bg-yellow-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-left">
+                    <div class="bg-yellow-200 rounded-full p-3 mb-4">
+                        <i class="fas fa-cloud-sun text-yellow-700 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Indian Meteorological Department (IMD)</h3>
+                    <p class="text-gray-600 text-sm">Get weather forecasts and climate information crucial for farming.</p>
+                </a>
+
+                <!-- Example Government Tool 6 -->
+                <a href="https://www.icar.org.in/" target="_blank" class="tool-card bg-purple-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-left">
+                    <div class="bg-purple-200 rounded-full p-3 mb-4">
+                        <i class="fas fa-flask text-purple-700 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">Indian Council of Agricultural Research (ICAR)</h3>
+                    <p class="text-gray-600 text-sm">Access research, education, and extension activities in agriculture.</p>
+                </a>
+
+                <!-- Example Government Tool 7 -->
+                <a href="https://www.nabard.org/" target="_blank" class="tool-card bg-pink-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-left">
+                    <div class="bg-pink-200 rounded-full p-3 mb-4">
+                        <i class="fas fa-hand-holding-usd text-pink-700 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800 mb-2">NABARD (National Bank for Agriculture and Rural Development)</h3>
+                    <p class="text-gray-600 text-sm">Information on rural development and agricultural finance.</p>
+                </a>
+                </div>
+            </div>
+
+            <!-- General Agricultural Tools Section -->
+            <div class="mb-8 text-left">
+                <h2 class="text-3xl font-bold text-green-700 mb-4">General Agricultural Tools</h2>
+                <p class="text-gray-700 mb-6">
+                    A curated list of practical tools and guides for various aspects of crop management.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Tool 1: Soil pH Calculator -->
+                    <a href="#" target="_blank" class="tool-card bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-left">
+                        <div class="bg-blue-200 rounded-full p-3 mb-4">
+                            <i class="fas fa-flask text-blue-700 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Soil pH Calculator</h3>
+                        <p class="text-gray-600 text-sm">Determine optimal pH levels for your crops.</p>
+                    </a>
+
+                    <!-- Tool 2: Planting Calendar -->
+                    <a href="#" target="_blank" class="tool-card bg-green-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-left">
+                        <div class="bg-green-200 rounded-full p-3 mb-4">
+                            <i class="fas fa-calendar-alt text-green-700 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Planting Calendar</h3>
+                        <p class="text-gray-600 text-sm">Find the best planting times for various crops.</p>
+                    </a>
+
+                    <!-- Tool 3: Water Requirement Calculator -->
+                    <a href="#" target="_blank" class="tool-card bg-purple-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-left">
+                        <div class="bg-purple-200 rounded-full p-3 mb-4">
+                            <i class="fas fa-tint text-purple-700 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Water Requirement Calculator</h3>
+                        <p class="text-gray-600 text-sm">Estimate daily water needs for your plants.</p>
+                    </a>
+
+                    <!-- Tool 4: Crop Yield Estimator -->
+                    <a href="#" target="_blank" class="tool-card bg-orange-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-left">
+                        <div class="bg-orange-200 rounded-full p-3 mb-4">
+                            <i class="fas fa-chart-line text-orange-700 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Crop Yield Estimator</h3>
+                        <p class="text-gray-600 text-sm">Predict potential crop yields based on inputs.</p>
+                    </a>
+
+                    <!-- Tool 5: Disease Prevention Tips -->
+                    <a href="#" target="_blank" class="tool-card bg-red-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-left">
+                        <div class="bg-red-200 rounded-full p-3 mb-4">
+                            <i class="fas fa-shield-alt text-red-700 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Disease Prevention Tips</h3>
+                        <p class="text-gray-600 text-sm">Learn strategies to keep your plants healthy.</p>
+                    </a>
+
+                    <!-- Tool 6 (User Provided): Fertilizer Calculator -->
+                    <a href="https://aesl.ces.uga.edu/soil/fertcalc/" target="_blank" class="tool-card bg-pink-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-left">
+                        <div class="bg-pink-200 rounded-full p-3 mb-4">
+                            <i class="fas fa-hand-holding-usd text-pink-700 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Fertilizer Calculator</h3>
+                        <p class="text-gray-600 text-sm">Calculate the price on custom land area and fertilizer.</p>
+                    </a>
+
+                    <!-- Tool 7 (User Provided): Weather Information -->
+                    <a href="https://aayush-1709.github.io/Weather_Info/" target="_blank" class="tool-card bg-yellow-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-left">
+                        <div class="bg-yellow-200 rounded-full p-3 mb-4">
+                            <i class="fas fa-cloud-sun text-yellow-700 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Weather Information</h3>
+                        <p class="text-gray-600 text-sm">Check weather across the world.</p>
+                    </a>
+
+                    <!-- Tool 8 (Added by AI): Crop Rotation Planner -->
+                    <a href="#" target="_blank" class="tool-card bg-indigo-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-left">
+                        <div class="bg-indigo-200 rounded-full p-3 mb-4">
+                            <i class="fas fa-sync-alt text-indigo-700 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Crop Rotation Planner</h3>
+                        <p class="text-gray-600 text-sm">Plan crop rotation for soil health and pest control.</p>
+                    </a>
+
+                    <!-- Tool 9 (Added by AI): Pest Identification Guide -->
+                    <a href="#" target="_blank" class="tool-card bg-teal-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-200 flex flex-col items-center justify-center text-left">
+                        <div class="bg-teal-200 rounded-full p-3 mb-4">
+                            <i class="fas fa-bug text-teal-700 text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">Pest Identification Guide</h3>
+                        <p class="text-gray-600 text-sm">Identify common agricultural pests and their damage.</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
