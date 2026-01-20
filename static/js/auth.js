@@ -3,14 +3,15 @@
 // ------------------------------------------------------------------
 // TODO: Replace the following config with your YOUR FIREBASE PROJECT configuration.
 // You can get this from the Firebase Console -> Project Settings -> General -> Your apps -> SDK setup/configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyB4pjZHnNq1lNkFrIth6BHakVt05MMDs_U",
-  authDomain: "crop-doctor-366f5.firebaseapp.com",
-  projectId: "crop-doctor-366f5",
-  storageBucket: "crop-doctor-366f5.firebasestorage.app",
-  messagingSenderId: "783881735705",
-  appId: "1:783881735705:web:1d2ea803c347cac81d2488",
-  measurementId: "G-3SKVRE2BJP"
+// Config is passed from Flask template via window.FIREBASE_CONFIG
+const firebaseConfig = window.FIREBASE_CONFIG || {
+    apiKey: "PLACEHOLDER",
+    authDomain: "PLACEHOLDER",
+    projectId: "PLACEHOLDER",
+    storageBucket: "PLACEHOLDER",
+    messagingSenderId: "PLACEHOLDER",
+    appId: "PLACEHOLDER",
+    measurementId: "PLACEHOLDER"
 };
 
 // Initialize Firebase

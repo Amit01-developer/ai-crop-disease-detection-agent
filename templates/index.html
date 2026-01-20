@@ -843,7 +843,8 @@
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
     <!-- Auth JS -->
-    <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+
+    <!-- Auth JS moved to bottom to safe load config -->
 
     <script>
       window.onload = function () {
@@ -874,6 +875,12 @@
         }, 2000); // Frame 1 duration
       };
     </script>
+
+    <!-- Pass Firebase Config from Flask to JS -->
+    <script>
+      window.FIREBASE_CONFIG = {{ firebase_context | tojson | safe }};
+    </script>
+    <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
 </body>
 
 </html>

@@ -236,7 +236,16 @@ def get_history():
 # --- Frontend Routes ---
 @app.route('/')
 def home():
-    return render_template('index.html')
+    firebase_context = {
+        "apiKey": os.getenv("FIREBASE_API_KEY"),
+        "authDomain": os.getenv("FIREBASE_AUTH_DOMAIN"),
+        "projectId": os.getenv("FIREBASE_PROJECT_ID"),
+        "storageBucket": os.getenv("FIREBASE_STORAGE_BUCKET"),
+        "messagingSenderId": os.getenv("FIREBASE_MESSAGING_SENDER_ID"),
+        "appId": os.getenv("FIREBASE_APP_ID"),
+        "measurementId": os.getenv("FIREBASE_MEASUREMENT_ID")
+    }
+    return render_template('index.html', firebase_context=firebase_context)
 
 @app.route('/history_page')
 def history_page():
@@ -253,11 +262,21 @@ def tools_page():
 if __name__ == '__main__':
     # This block is for local development only, It will NOT run when Gunicorn imports app.py on Render.
     print("Starting Flask server for local development...")
+    
+    # Load environment variables from .env file
+    try:
+        from dotenv import load_dotenv
+        load_dotenv()
+        print("Loaded environment variables from .env")
+    except ImportError:
+        print("python-dotenv not found, skipping .env load")
 
     # Initialize Firebase and load resources
     if not initialize_firebase():
-        print("CRITICAL ERROR: Firebase initialization failed during app startup.")
-        exit(1)
+        print("WARNING: Firebase initialization failed. Database features (History) will be disabled.")
+        # Do not exit, allow the app to run without DB
+    else:
+        print("Firebase initialized successfully.")
 
     if not load_resources():
         print("CRITICAL ERROR: Model and class indices loading failed during app startup.")
