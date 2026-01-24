@@ -41,7 +41,7 @@ Follow these simple steps to use AI Crop Doctor effectively:
 ---
 
 ## 🗂 Project Structure
-
+```bash
 ai-crop-disease-detection-agent
 │ app.py
 │ class_indices.json
@@ -69,7 +69,7 @@ history.html
 index.html
 tools.html
 user_guide.html
-
+```
 
 ---
 
