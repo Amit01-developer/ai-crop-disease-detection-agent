@@ -293,7 +293,16 @@ document.addEventListener('DOMContentLoaded', () => {
             predictedDiseaseName = data.predicted_class_name;
             currentConfidence = data.confidence; // Store confidence
 
-            predictionResult.innerHTML = `<span class="font-bold text-blue-800">${predictedDiseaseName.replace(/_/g, ' ')}</span>`;
+           let formattedDisease = predictedDiseaseName.replace(/_/g, ' ');
+           const words = formattedDisease.split(' ');
+           if (words.length > 1 && words[0] === words[1]) {
+             words.splice(1, 1);
+          }
+           formattedDisease = words.join(' ');
+
+           predictionResult.innerHTML =
+             `<span class="font-bold text-blue-800">${formattedDisease}</span>`;
+
             confidenceBar.style.width = `${currentConfidence}%`; // Update confidence bar width
             confidenceScoreText.textContent = `${currentConfidence.toFixed(2)}%`; // Update confidence score text
 
