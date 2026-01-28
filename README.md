@@ -42,36 +42,36 @@ Follow these simple steps to use AI Crop Doctor effectively:
 
 ## 🗂 Project Structure
 ```bash
-ai-crop-disease-detection-agent
-│__app.py
-│__class_indices.json
-│__crop_diagnosis_best_model.tflite
-│__README.md
-│__requirements.txt
-│__.gitattributes
-│__.gitignore
+📁 ai-crop-disease-detection-agent/
+│__📄 app.py
+│__📄 class_indices.json
+│__📄 crop_diagnosis_best_model.tflite
+│__📄 README.md
+│__📄 requirements.txt
+│__📄 .gitattributes
+│__📄 .gitignore
 │
-├───static
-│ ├───css
-│ │   |___style.css
-│ ├───images
-│ │   |___apple_black-rot.JPG
-│ │   |___apple_cedar_rust.JPG
-│ │   |___apple_healthy.JPG
-│ │   |___... (35 more sample images)
-│ └───js
-│ |   |___history.js
-│ |   |___main.js
-│ |   |___user_guide.js
-| |   |___auth.js
-| |   |___user_guide.js
-| |   |___emergency.js
+├───📁 static/
+│ ├───📁 css/
+│ │   |___📄 style.css
+│ ├───📁 images/
+│ │   |___📄 apple_black-rot.JPG
+│ │   |___📄 apple_cedar_rust.JPG
+│ │   |___📄 apple_healthy.JPG
+│ │   |___... 📄 (35 more sample images)
+│ └───📁 js/
+│ |   |___📄 history.js
+│ |   |___📄 main.js
+│ |   |___📄 user_guide.js
+| |   |___📄 auth.js
+| |   |___📄 user_guide.js
+| |   |___📄 emergency.js
 │
-└───templates
-| |___history.html
-| |___index.html
-| |___tools.html
-| |___user_guide.html
+└───📁 templates/
+| |___📄 history.html
+| |___📄 index.html
+| |___📄 tools.html
+| |___📄 user_guide.html
 ```
 
 ---
