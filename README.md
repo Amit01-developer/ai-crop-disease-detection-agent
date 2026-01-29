@@ -100,14 +100,15 @@ http://127.0.0.1:5000
 🤝 Contributing
 
 Contributions are welcome!
-Fork the repository
-Create a new branch (git checkout -b feature-name)
-Make your changes
-Push to your branch (git push origin feature-name)
-Open a Pull Request
+- Fork the repository
+- Create a new branch `git checkout -b feature-name`
+- Make your changes
+- Push to your branch `git push origin feature-name`
+- Open a Pull Request
+Read the [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md) and [Contribution](Contribution.md) for further details.
 
 📄 License
 
-This project is MIT licensed.
+This project is MIT licensed. View [LICENSE](LICENSE)
 
-<p align="center"> <img src="https://capsule-render.vercel.app/api?type=waving&color=0:22c55e,100:16a34a&height=100&section=footer" alt="Wave Animation" /> </p> ```
+<p align="center"> <img src="https://capsule-render.vercel.app/api?type=waving&color=0:22c55e,100:16a34a&height=100&section=footer" alt="Wave Animation" /> </p> 
